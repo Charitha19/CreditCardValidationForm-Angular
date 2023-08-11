@@ -1,0 +1,48 @@
+<!-- Using reactive forms -->
+
+<div class="card">
+    <div class="container-fluid text-center text-danger">
+      <h4>Credit Card</h4>
+    </div>
+    <form [formGroup]="paymentForm" (ngSubmit)="onSubmit()">
+      <input formControlName="cardNumber" type="number" placeholder="Card Number" data-test-id="number-input">
+      <p *ngIf="cardNumber && cardNumber.invalid && cardNumber.touched" data-test-id="number-input-error">
+        Invalid Card Number.
+      </p><br>
+  
+      <input formControlName="cardName" type="text" placeholder="Name on card" data-test-id="name-input">
+      <p *ngIf="cardName && cardName.invalid && cardName.touched" data-test-id="name-input-error">
+        Invalid Cardholder Name.
+      </p><br>
+  
+      <div class="row">
+        <div class="col">
+            <input formControlName="expirationMonth" type="number" placeholder="##" data-test-id="month-input" min="01" max="12">
+          <br><label for="expirationMonth">Expiry Month</label>
+          <p *ngIf="expirationMonth && expirationMonth.invalid && expirationMonth.touched" data-test-id="month-input-error">
+            Invalid Month.
+          </p>
+        </div>
+  
+        <div class="col">
+          <input formControlName="expirationYear" type="number" placeholder="####" pattern="({{currentYear}}|{{currentYear+1}}|{{currentYear+2}}|{{currentYear+3}})" data-test-id="year-input">
+          <br><label for="expirationYear">Expiry Year</label>
+          <p *ngIf="expirationYear && expirationYear.invalid && expirationYear.touched" data-test-id="year-input-error">
+            Invalid Year.
+          </p>
+        </div>
+  
+        <div class="col">
+          <input formControlName="cvv" type="number" placeholder="###" data-test-id="cvv-input">
+          <br><label for="cvv">CVV/CVC</label>
+          <p *ngIf="cvv && cvv.invalid && cvv.touched" data-test-id="cvv-input-error">
+            Invalid CVV/CVC.
+          </p>
+        </div>
+      </div><br>
+  
+      <button type="submit" class="btn" data-test-id="submit-input" [disabled]="paymentForm.invalid">Submit</button>
+    </form>
+  </div>
+  
+  
